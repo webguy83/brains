@@ -22,7 +22,17 @@ const ProfileIcon = ({ onRouteChange, toggleModalOpen }) => {
       </DropdownToggle>
       <DropdownMenu right className="b--transparent shadow-5 dropdownoption">
         <DropdownItem onClick={toggleModalOpen}>View Profile</DropdownItem>
-        <DropdownItem onClick={() => onRouteChange('signout')}>Sign Out</DropdownItem>
+        <DropdownItem onClick={() => {
+          fetch('http://localhost:3001/signout', {
+            method: "post"
+          })
+            .then(res => res.json())
+            .then(() => {
+              console.log('hiii')
+              onRouteChange('signout')
+            })
+            .catch(console.log)
+        }}>Sign Out</DropdownItem>
       </DropdownMenu>
     </Dropdown>
   </div>

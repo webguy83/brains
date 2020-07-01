@@ -8,6 +8,7 @@ const { requireAuth } = require('./middlewares/Auth');
 
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
+const { authSignout } = require('./controllers/signout');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
@@ -29,6 +30,7 @@ app.get('/profile/:id', requireAuth, (req, res) => { profile.handleProfileGet(re
 app.post('/profile/:id', requireAuth, (req, res) => { profile.handleProfileUpdate(req, res, db) })
 app.put('/image', requireAuth, (req, res) => { image.handleImage(req, res, db) })
 app.post('/imageurl', requireAuth, (req, res) => { image.handleApiCall(req, res) })
+app.post('/signout', authSignout());
 
 app.listen(3001, () => {
   console.log('app is running on port 3001 hazzaaah');

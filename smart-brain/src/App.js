@@ -35,6 +35,8 @@ const initialState = {
   user: {
     id: '',
     name: '',
+    age: 0,
+    pet: '',
     email: '',
     entries: 0,
     joined: ''
@@ -85,6 +87,8 @@ class App extends Component {
         id: data.id,
         name: data.name,
         email: data.email,
+        age: data.age,
+        pet: data.pet,
         entries: data.entries,
         joined: data.joined
       }
@@ -119,7 +123,7 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-    fetch('http://localhost:3000/imageurl', {
+    fetch('http://localhost:3001/imageurl', {
       method: 'post',
       headers: { 'Content-Type': 'application/json', "Authorization": window.sessionStorage.getItem('token') },
       body: JSON.stringify({
@@ -129,7 +133,7 @@ class App extends Component {
       .then(response => response.json())
       .then(response => {
         if (response) {
-          fetch('http://localhost:3000/image', {
+          fetch('http://localhost:3001/image', {
             method: 'put',
             headers: { 'Content-Type': 'application/json', 'Authorization': window.sessionStorage.getItem('token') },
             body: JSON.stringify({

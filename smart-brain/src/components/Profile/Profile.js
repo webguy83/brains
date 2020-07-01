@@ -13,7 +13,7 @@ const Profile = ({ isProfileOpen, toggleModalOpen, user, loadUser }) => {
         setName(val);
         break;
       case 'user-age':
-        setAge(val);
+        setAge(parseInt(val, 10));
         break;
       case 'user-pet':
         setPet(val);
@@ -46,8 +46,8 @@ const Profile = ({ isProfileOpen, toggleModalOpen, user, loadUser }) => {
               src="http://tachyons.io/img/logo.jpg"
               className="br-100 ba h3 w3 dib" alt="avatar" />
             <h1>{name}</h1>
-            <h4>Images submitted: 3247</h4>
-            <p>Member since: Fucktober</p>
+            <h4>Images submitted: {user.entries}</h4>
+            <p>Member since: {user.joined.slice(0, 10)}</p>
             <hr />
             <label className="mt2 fw6" htmlFor="user-name">Name:</label>
             <input
