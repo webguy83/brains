@@ -18,7 +18,6 @@ const handleProfileUpdate = (req, res, db) => {
   db('users').where({ id }).update({ name })
     .then(data => {
       if (data) {
-        console.log(data)
         res.json('success');
       } else {
         res.status(400).json('cannot update')
