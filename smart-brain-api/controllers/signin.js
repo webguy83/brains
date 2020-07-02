@@ -1,6 +1,5 @@
 const { redisClient } = require('../middlewares/Auth');
-
-const jwt = require('jsonwebtoken');
+const { setToken, signToken } = require('../utils/utils');
 
 const handleSignin = (db, bcrypt, req, res) => {
   const { email, password } = req.body;
@@ -34,17 +33,6 @@ const getAuthTokenId = (req, res) => {
     return res.json({ id: reply })
   })
 }
-
-
-const signToken = (email) => {
-  const jwtPayload = { email }
-  return jwt.sign(jwtPayload, 'Nonsense garbage', { expiresIn: '5 days' })
-}
-
-const setToken = (key, value) => {
-  return Promise.resolve(redisClient.set(key, value))
-}
-
 
 const createSessions = (user) => {
   const { email, id } = user;

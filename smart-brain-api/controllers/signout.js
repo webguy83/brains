@@ -1,16 +1,15 @@
 const { redisClient } = require('../middlewares/Auth');
 
 const authSignout = () => (req, res) => {
-  console.log(redisClient.set('toke', 324324))
-  redisClient.del('token', (err, reply) => {
-
+  const { authorization } = req.headers;
+  redisClient.del(authorization, (err, reply) => {
     if (reply === 1) {
       console.log('buhh bye!')
+      res.json({ success: true })
     } else {
       console.log('no can do')
     }
   })
-  res.json({ success: true })
 }
 
 module.exports = {

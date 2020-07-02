@@ -24,11 +24,14 @@ const ProfileIcon = ({ onRouteChange, toggleModalOpen }) => {
         <DropdownItem onClick={toggleModalOpen}>View Profile</DropdownItem>
         <DropdownItem onClick={() => {
           fetch('http://localhost:3001/signout', {
-            method: "post"
+            method: "post",
+            headers: {
+              "Authorization": window.sessionStorage.getItem('token')
+            }
           })
             .then(res => res.json())
             .then(() => {
-              console.log('hiii')
+              window.sessionStorage.removeItem('token');
               onRouteChange('signout')
             })
             .catch(console.log)

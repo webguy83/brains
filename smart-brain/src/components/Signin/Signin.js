@@ -1,5 +1,7 @@
 import React from 'react';
 import '../CustomForm.css';
+import { fetchProfileData } from '../../utils/utils';
+
 
 class Signin extends React.Component {
   constructor(props) {
@@ -32,12 +34,7 @@ class Signin extends React.Component {
         if (data.id && data.success) {
           window.sessionStorage.setItem('token', data.token);
 
-          fetch(`http://localhost:3001/profile/${data.id}`, {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': data.token
-            }
-          })
+          fetchProfileData(data.id, data.token)
             .then(res => res.json())
             .then(user => {
               if (user && user.email) {

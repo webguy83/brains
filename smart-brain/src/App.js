@@ -10,6 +10,7 @@ import Rank from './components/Rank/Rank';
 import Modal from './components/Modal/Modal';
 import './App.css';
 import Profile from './components/Profile/Profile';
+import { fetchProfileData } from './utils/utils';
 
 const particlesOptions = {
   particles: {
@@ -62,12 +63,7 @@ class App extends Component {
         .then(res => res.json())
         .then(data => {
           if (data && data.id) {
-            fetch(`http://localhost:3001/profile/${data.id}`, {
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': token
-              }
-            })
+            fetchProfileData(data.id, token)
               .then(res => res.json())
               .then(user => {
                 if (user && user.email) {
