@@ -166,12 +166,13 @@ class App extends Component {
 
   render() {
     const { isSignedIn, imageUrl, route, box, isProfileOpen } = this.state;
+
     return (
       <div className="App">
         <Particles className='particles'
           params={particlesOptions}
         />
-        <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} toggleModalOpen={this.toggleModalOpen} />
+        <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} toggleModalOpen={this.toggleModalOpen} pet={this.state.user.pet} />
 
         {isProfileOpen && <Modal isProfileOpen={isProfileOpen}>
           <Profile isProfileOpen={isProfileOpen} toggleModalOpen={this.toggleModalOpen} user={this.state.user} loadUser={this.loadUser} />
